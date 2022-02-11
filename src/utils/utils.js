@@ -7,3 +7,5 @@ export const getStreetsData = (data) =>
     }
     return res;
   }, []);
+
+export const searchMatches = (arr, match) => arr.filter((item) => item.name.toLowerCase().startsWith(match));

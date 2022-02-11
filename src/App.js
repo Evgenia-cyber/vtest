@@ -1,7 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './App.css';
 import { fetchStreets } from './redux/reducers/addressReducer';
+import StreetSelect from './components/StreetSelect/StreetSelect';
+
+import './App.css';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -17,7 +19,13 @@ const App = () => {
     dispatch(fetchStreets());
   }, []);
 
-  return <div className="App">Learn React</div>;
+  return (
+    <div className="App">
+      <div className="selects">
+        <StreetSelect />
+      </div>
+    </div>
+  );
 };
 
 export default App;

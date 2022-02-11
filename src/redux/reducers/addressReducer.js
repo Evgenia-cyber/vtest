@@ -1,12 +1,17 @@
 import { addressAPI } from '../../api/api';
-import { getStreetsData } from '../../utils/utils';
+import { getStreetsData, searchMatches } from '../../utils/utils';
 
 const SET_STREETS = 'vtest/address/SET_STREETS';
+const SET_FILTERED_STREETS = 'vtest/address/SET_FILTERED_STREETS';
+const RESET_FILTERED_STREETS = 'vtest/address/RESET_FILTERED_STREETS';
 const IS_LOADING = 'vtest/address/IS_LOADING';
+const SET_SELECTED_STREET = 'vtest/address/SET_SELECTED_STREET';
 
 let initialState = {
   streets: [],
   isLoading: false,
+  selectedStreet: { id: -1, name: '' },
+  filteredStreets: [],
 };
 
 const addressReducer = (state = initialState, action) => {
@@ -20,7 +25,15 @@ const addressReducer = (state = initialState, action) => {
       return {
         ...state,
         streets: action.payload,
+        filteredStreets: action.payload,
       };
+    case SET_FILTERED_STREETS:
+      return {
+        ...state,
+        filteredStreets: searchMatches(state.streets, action.payload),
+      };
+    case RESET_FILTERED_STREETS:
+      return { ...state, filteredStreets: state.streets };
     default:
       return state;
   }
@@ -29,6 +42,13 @@ const addressReducer = (state = initialState, action) => {
 export const setStreets = (streets) => ({
   type: SET_STREETS,
   payload: streets,
+});
+export const setFilteredStreets = (text) => ({
+  type: SET_FILTERED_STREETS,
+  payload: text,
+});
+export const resetFilteredStreets = () => ({
+  type: RESET_FILTERED_STREETS,
 });
 export const setIsLoading = (isLoading) => ({
   type: IS_LOADING,
