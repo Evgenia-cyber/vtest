@@ -8,13 +8,13 @@ import './App.css';
 const App = () => {
   const dispatch = useDispatch();
 
-  const { selectedStreetId } = useSelector((state) => ({
-    selectedStreetId: state.streetReducer.selectedStreetId,
+  const { houses } = useSelector((state) => ({
+    houses: state.houseReducer.houses,
   }));
   const { isLoading } = useSelector((state) => ({
     isLoading: state.commonReducer.isLoading,
   }));
-  console.log('selectedStreetId', selectedStreetId);
+  console.log('houses', houses);
   console.log('isLoading', isLoading);
 
   React.useEffect(() => {

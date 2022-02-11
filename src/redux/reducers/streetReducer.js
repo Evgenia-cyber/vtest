@@ -1,15 +1,14 @@
 import { addressAPI } from '../../api/api';
+import { NO_SELECTED_INDEX } from '../../constants';
 import { getStreetsData, searchMatches } from '../../utils/utils';
 import { setIsLoading } from './commonReducer';
 
 const SET_STREETS = 'vtest/street/SET_STREETS';
 const SET_FILTERED_STREETS = 'vtest/street/SET_FILTERED_STREETS';
 const RESET_FILTERED_STREETS = 'vtest/street/RESET_FILTERED_STREETS';
-const SET_SELECTED_STREET = 'vtest/street/SET_SELECTED_STREET';
 
 let initialState = {
   streets: [],
-  selectedStreetId: -1,
   filteredStreets: [],
 };
 
@@ -28,8 +27,6 @@ const streetReducer = (state = initialState, action) => {
       };
     case RESET_FILTERED_STREETS:
       return { ...state, filteredStreets: state.streets };
-    case SET_SELECTED_STREET:
-      return { ...state, selectedStreetId: action.payload };
     default:
       return state;
   }
@@ -45,10 +42,6 @@ export const setFilteredStreets = (text) => ({
 });
 export const resetFilteredStreets = () => ({
   type: RESET_FILTERED_STREETS,
-});
-export const setSelectedStreetId = (id) => ({
-  type: SET_SELECTED_STREET,
-  payload: id,
 });
 
 export const fetchStreets = () => async (dispatch) => {

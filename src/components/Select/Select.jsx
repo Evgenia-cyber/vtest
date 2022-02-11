@@ -13,7 +13,7 @@ const Select = ({
   selectType = 'address_select',
   resetFilteredOptions,
   setFilteredOptions,
-  setSelectedOptionId,
+  setSelectedOption,
 }) => {
   const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ const Select = ({
   const onOptionClickHandler = (id, label) => {
     setIsShow(false);
     setInputValue(label);
-    dispatch(setSelectedOptionId(id));
+    setSelectedOption(id);
   };
 
   return (
