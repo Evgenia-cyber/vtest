@@ -1,26 +1,20 @@
 import { addressAPI } from '../../api/api';
 import { getStreetsData, searchMatches } from '../../utils/utils';
+import { setIsLoading } from './commonReducer';
 
-const SET_STREETS = 'vtest/address/SET_STREETS';
-const SET_FILTERED_STREETS = 'vtest/address/SET_FILTERED_STREETS';
-const RESET_FILTERED_STREETS = 'vtest/address/RESET_FILTERED_STREETS';
-const IS_LOADING = 'vtest/address/IS_LOADING';
-const SET_SELECTED_STREET = 'vtest/address/SET_SELECTED_STREET';
+const SET_STREETS = 'vtest/street/SET_STREETS';
+const SET_FILTERED_STREETS = 'vtest/street/SET_FILTERED_STREETS';
+const RESET_FILTERED_STREETS = 'vtest/street/RESET_FILTERED_STREETS';
+const SET_SELECTED_STREET = 'vtest/street/SET_SELECTED_STREET';
 
 let initialState = {
   streets: [],
-  isLoading: false,
-  selectedStreet: { id: -1, name: '' },
+  selectedStreetId: -1,
   filteredStreets: [],
 };
 
-const addressReducer = (state = initialState, action) => {
+const streetReducer = (state = initialState, action) => {
   switch (action.type) {
-    case IS_LOADING:
-      return {
-        ...state,
-        isLoading: action.payload,
-      };
     case SET_STREETS:
       return {
         ...state,
@@ -34,6 +28,8 @@ const addressReducer = (state = initialState, action) => {
       };
     case RESET_FILTERED_STREETS:
       return { ...state, filteredStreets: state.streets };
+    case SET_SELECTED_STREET:
+      return { ...state, selectedStreetId: action.payload };
     default:
       return state;
   }
@@ -50,9 +46,9 @@ export const setFilteredStreets = (text) => ({
 export const resetFilteredStreets = () => ({
   type: RESET_FILTERED_STREETS,
 });
-export const setIsLoading = (isLoading) => ({
-  type: IS_LOADING,
-  payload: isLoading,
+export const setSelectedStreetId = (id) => ({
+  type: SET_SELECTED_STREET,
+  payload: id,
 });
 
 export const fetchStreets = () => async (dispatch) => {
@@ -68,4 +64,4 @@ export const fetchStreets = () => async (dispatch) => {
   }
 };
 
-export default addressReducer;
+export default streetReducer;

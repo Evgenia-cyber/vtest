@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchStreets } from './redux/reducers/addressReducer';
+import { fetchStreets } from './redux/reducers/streetReducer';
 import StreetSelect from './components/StreetSelect/StreetSelect';
 
 import './App.css';
@@ -8,11 +8,13 @@ import './App.css';
 const App = () => {
   const dispatch = useDispatch();
 
-  const { streets, isLoading } = useSelector((state) => ({
-    streets: state.addressReducer.streets,
-    isLoading: state.addressReducer.isLoading,
+  const { selectedStreetId } = useSelector((state) => ({
+    selectedStreetId: state.streetReducer.selectedStreetId,
   }));
-  console.log('streets', streets);
+  const { isLoading } = useSelector((state) => ({
+    isLoading: state.commonReducer.isLoading,
+  }));
+  console.log('selectedStreetId', selectedStreetId);
   console.log('isLoading', isLoading);
 
   React.useEffect(() => {

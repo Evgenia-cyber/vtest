@@ -1,10 +1,12 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
-import addressReducer from '../redux/reducers/addressReducer';
+import commonReducer from '../redux/reducers/commonReducer';
+import streetReducer from '../redux/reducers/streetReducer';
 
 const reducers = combineReducers({
-  addressReducer,
+  commonReducer,
+  streetReducer,
 });
 
 const store = createStore(reducers, applyMiddleware(thunk));

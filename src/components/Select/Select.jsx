@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import ImageBtn from '../ImageBtn/ImageBtn';
 import Option from '../Option/Option';
 import arrowImg from '../../assets/icons/arrow.svg';
@@ -8,13 +9,26 @@ import styles from './Select.module.css';
 const Select = ({
   options,
   placeholder,
-  value,
-  onChangeHandler,
-  selectOption,
   isDisabled = false,
   selectType = 'address_select',
+  resetFilteredOptions,
+  setFilteredOptions,
+  setSelectedOptionId,
 }) => {
+  const dispatch = useDispatch();
+
   const [isShow, setIsShow] = React.useState(false);
+
+  const [inputValue, setInputValue] = React.useState('');
+
+  const searchOption = (event) => {
+    const { value } = event.target;
+    setInputValue(value);
+    if (value === '') {
+      dispatch(resetFilteredOptions());
+    }
+    dispatch(setFilteredOptions(value));
+  };
 
   const toggleShowOptions = () => {
     setIsShow(!isShow);
@@ -24,9 +38,10 @@ const Select = ({
     setIsShow(true);
   };
 
-  const onClickHandler = (id, label) => {
+  const onOptionClickHandler = (id, label) => {
     setIsShow(false);
-    selectOption(id, label);
+    setInputValue(label);
+    dispatch(setSelectedOptionId(id));
   };
 
   return (
@@ -37,8 +52,8 @@ const Select = ({
           type="text"
           disabled={isDisabled}
           placeholder={placeholder}
-          value={value}
-          onChange={onChangeHandler}
+          value={inputValue}
+          onChange={searchOption}
           onFocus={showOptions}
         />
         <ImageBtn
@@ -52,7 +67,7 @@ const Select = ({
         {options.length > 0 && (
           <ul className={styles.list}>
             {options.map((option) => (
-              <Option key={option.id} label={option.name} id={option.id} onClickHandler={onClickHandler} />
+              <Option key={option.id} label={option.name} id={option.id} onClickHandler={onOptionClickHandler} />
             ))}
           </ul>
         )}
