@@ -35,7 +35,8 @@ const StreetSelect = () => {
       placeholder="Улица"
       value={inputValue}
       onChangeHandler={searchStreet}
-      onClickHandler={selectStreet}
+      selectOption={selectStreet}
+      selectType="street_select"
     />
   );
 };

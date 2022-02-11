@@ -1,0 +1,14 @@
+.option {
+  padding: 2px 5px;
+  transition: 0.3s ease;
+}
+
+.option:hover {
+  cursor: pointer;
+  background-color: #e1f4ff;
+  transition: 0.3s ease;
+}
+
+.option:active {
+  background-color: #a0c6df;
+}
