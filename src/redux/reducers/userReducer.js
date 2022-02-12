@@ -1,11 +1,13 @@
 import { userAPI } from '../../api/api';
-import { setApartments } from './apartmentReducer';
+import { NO_ADDRESS } from '../../constants';
 import { setIsLoading } from './commonReducer';
 
 const SET_USERS = 'vtest/user/SET_USERS';
+const SET_ADDRESS = 'vtest/user/SET_ADDRESS';
 
-let initialState = {
+const initialState = {
   users: [],
+  address: { id: NO_ADDRESS, name: '' },
 };
 
 const userReducer = (state = initialState, action) => {
@@ -14,6 +16,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         users: action.payload,
+      };
+    case SET_ADDRESS:
+      return {
+        ...state,
+        address: action.payload,
       };
     default:
       return state;
@@ -25,9 +32,15 @@ export const setUsers = (users) => ({
   payload: users,
 });
 
-export const fetchAllUsers = (apartmentId) => async (dispatch) => {
+export const setAddress = (apartment) => ({
+  type: SET_ADDRESS,
+  payload: apartment,
+});
+
+export const fetchAllUsers = (apartmentId, apartmentNumber) => async (dispatch) => {
   dispatch(setIsLoading(true));
   try {
+    dispatch(setAddress({ apartmentId, apartmentNumber }));
     const { data } = await userAPI.getAllUsers(apartmentId);
     dispatch(setUsers(data));
   } catch (error) {

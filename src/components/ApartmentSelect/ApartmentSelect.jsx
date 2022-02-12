@@ -23,10 +23,9 @@ const ApartmentSelect = () => {
   }));
 
   const selectApartment = (id, label) => {
-    console.log('id', id);
     dispatch(setIsShowApartments(false));
     dispatch(setApartmentInputValue(label));
-    dispatch(fetchAllUsers(id));
+    dispatch(fetchAllUsers(id, label));
   };
 
   const searchApartment = (event) => {

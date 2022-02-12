@@ -7,3 +7,5 @@ export const ENDPOINTS = {
 
 export const ALLOWED_CITY_ID = 1;
 export const ALLOWED_TYPE_NAME = 'Квартира';
+
+export const NO_ADDRESS = -1;
