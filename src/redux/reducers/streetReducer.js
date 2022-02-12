@@ -6,10 +6,12 @@ import { setIsLoading } from './commonReducer';
 const SET_STREETS = 'vtest/street/SET_STREETS';
 const SET_FILTERED_STREETS = 'vtest/street/SET_FILTERED_STREETS';
 const RESET_FILTERED_STREETS = 'vtest/street/RESET_FILTERED_STREETS';
+const SET_INPUT_VALUE = 'vtest/street/SET_INPUT_VALUE';
 
 let initialState = {
   streets: [],
   filteredStreets: [],
+  inputValue: '',
 };
 
 const streetReducer = (state = initialState, action) => {
@@ -27,6 +29,8 @@ const streetReducer = (state = initialState, action) => {
       };
     case RESET_FILTERED_STREETS:
       return { ...state, filteredStreets: state.streets };
+    case SET_INPUT_VALUE:
+      return { ...state, inputValue: action.payload };
     default:
       return state;
   }
@@ -42,6 +46,10 @@ export const setFilteredStreets = (text) => ({
 });
 export const resetFilteredStreets = () => ({
   type: RESET_FILTERED_STREETS,
+});
+export const setStreetInputValue = (value) => ({
+  type: SET_INPUT_VALUE,
+  payload: value,
 });
 
 export const fetchStreets = () => async (dispatch) => {

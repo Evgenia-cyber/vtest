@@ -2,15 +2,17 @@ import { addressAPI } from '../../api/api';
 import { searchMatches } from '../../utils/utils';
 import { setIsLoading } from './commonReducer';
 
-const SET_HOUSES = 'vtest/street/SET_HOUSES';
-const SET_FILTERED_HOUSES = 'vtest/street/SET_FILTERED_HOUSES';
-const RESET_FILTERED_HOUSES = 'vtest/street/RESET_FILTERED_HOUSES';
-const SET_IS_DISABLED = 'vtest/street/SET_IS_DISABLED';
+const SET_HOUSES = 'vtest/house/SET_HOUSES';
+const SET_FILTERED_HOUSES = 'vtest/house/SET_FILTERED_HOUSES';
+const RESET_FILTERED_HOUSES = 'vtest/house/RESET_FILTERED_HOUSES';
+const SET_IS_DISABLED = 'vtest/house/SET_IS_DISABLED';
+const SET_INPUT_VALUE = 'vtest/house/SET_INPUT_VALUE';
 
 let initialState = {
   houses: [],
   isDisabled: true,
   filteredHouses: [],
+  inputValue: '',
 };
 
 const houseReducer = (state = initialState, action) => {
@@ -30,6 +32,8 @@ const houseReducer = (state = initialState, action) => {
       return { ...state, filteredHouses: state.houses };
     case SET_IS_DISABLED:
       return { ...state, isDisabled: action.payload };
+    case SET_INPUT_VALUE:
+      return { ...state, inputValue: action.payload };
     default:
       return state;
   }
@@ -49,6 +53,10 @@ export const resetFilteredHouses = () => ({
 export const setIsHousesDisabled = (isDisabled) => ({
   type: SET_IS_DISABLED,
   payload: isDisabled,
+});
+export const setHouseInputValue = (value) => ({
+  type: SET_INPUT_VALUE,
+  payload: value,
 });
 
 export const fetchHouses = (streetId) => async (dispatch) => {

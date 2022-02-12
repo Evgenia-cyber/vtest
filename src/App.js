@@ -4,6 +4,7 @@ import { fetchStreets } from './redux/reducers/streetReducer';
 import StreetSelect from './components/StreetSelect/StreetSelect';
 
 import './App.css';
+import HouseSelect from './components/HouseSelect/HouseSelect';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const App = () => {
     <div className="App">
       <div className="selects">
         <StreetSelect />
+        <HouseSelect />
       </div>
     </div>
   );
