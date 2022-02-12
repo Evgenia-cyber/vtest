@@ -5,6 +5,7 @@ import StreetSelect from './components/StreetSelect/StreetSelect';
 
 import './App.css';
 import HouseSelect from './components/HouseSelect/HouseSelect';
+import ApartmentSelect from './components/ApartmentSelect/ApartmentSelect';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const App = () => {
       <div className="selects">
         <StreetSelect />
         <HouseSelect />
+        <ApartmentSelect />
       </div>
     </div>
   );

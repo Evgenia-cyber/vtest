@@ -27,6 +27,9 @@ const HouseSelect = () => {
     dispatch(setHouseInputValue(value));
     if (value === '') {
       dispatch(resetFilteredHouses());
+
+      dispatch(setIsApartmentsDisabled(true));
+      dispatch(setApartmentInputValue(''));
     }
     dispatch(setFilteredHouses(value));
   };
