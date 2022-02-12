@@ -7,8 +7,12 @@
   border: none;
 }
 
-button:hover {
+.button:hover {
   cursor: pointer;
+}
+
+.button:disabled {
+  cursor: default;
 }
 
 .button img {
