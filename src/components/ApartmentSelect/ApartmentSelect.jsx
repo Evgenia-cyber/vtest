@@ -7,6 +7,7 @@ import {
   setFilteredApartments,
   setIsShowApartments,
 } from '../../redux/reducers/apartmentReducer';
+import { fetchAllUsers } from '../../redux/reducers/userReducer';
 import Select from '../Select/Select';
 
 import styles from './ApartmentSelect.module.css';
@@ -22,10 +23,10 @@ const ApartmentSelect = () => {
   }));
 
   const selectApartment = (id, label) => {
+    console.log('id', id);
     dispatch(setIsShowApartments(false));
     dispatch(setApartmentInputValue(label));
-    // dispatch(fetchApartments(id));
-    // dispatch(setIsApartmentsDisabled(false));
+    dispatch(fetchAllUsers(id));
   };
 
   const searchApartment = (event) => {

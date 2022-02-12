@@ -10,13 +10,13 @@ import ApartmentSelect from './components/ApartmentSelect/ApartmentSelect';
 const App = () => {
   const dispatch = useDispatch();
 
-  const { apartments } = useSelector((state) => ({
-    apartments: state.apartmentReducer.apartments,
+  const { users } = useSelector((state) => ({
+    users: state.userReducer.users,
   }));
   const { isLoading } = useSelector((state) => ({
     isLoading: state.commonReducer.isLoading,
   }));
-  console.log('apartments', apartments);
+  console.log('users', users);
   console.log('isLoading', isLoading);
 
   React.useEffect(() => {

@@ -3,10 +3,17 @@ import { API_BASE_URL, ENDPOINTS } from '../constants';
 
 const instance = axios.create({
   baseURL: API_BASE_URL,
+  headers: {
+    Accept: 'text/plain',
+  },
 });
 
 export const addressAPI = {
   getStreets: () => instance.get(`${ENDPOINTS.request}/streets`),
   getHouses: (streetId) => instance.get(`${ENDPOINTS.request}/houses/${streetId}`),
-  getApartments: (apartmentId) => instance.get(`${ENDPOINTS.request}/house_flats/${apartmentId}`),
+  getApartments: (houseId) => instance.get(`${ENDPOINTS.request}/house_flats/${houseId}`),
+};
+
+export const userAPI = {
+  getAllUsers: (apartmentId) => instance.get(`${ENDPOINTS.housing}clients?addressId=${apartmentId}`),
 };
