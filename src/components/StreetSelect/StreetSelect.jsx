@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { setApartmentInputValue, setIsApartmentsDisabled } from '../../redux/reducers/apartmentReducer';
 import { fetchHouses, setHouseInputValue, setIsHousesDisabled } from '../../redux/reducers/houseReducer';
 import { resetFilteredStreets, setFilteredStreets, setStreetInputValue } from '../../redux/reducers/streetReducer';
 import Select from '../Select/Select';
@@ -29,6 +30,9 @@ const StreetSelect = () => {
 
       dispatch(setIsHousesDisabled(true));
       dispatch(setHouseInputValue(''));
+
+      dispatch(setIsApartmentsDisabled(true));
+      dispatch(setApartmentInputValue(''));
     }
     dispatch(setFilteredStreets(value));
   };

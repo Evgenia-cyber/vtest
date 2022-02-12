@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { fetchApartments, setIsApartmentsDisabled } from '../../redux/reducers/apartmentReducer';
 import { resetFilteredHouses, setFilteredHouses, setHouseInputValue } from '../../redux/reducers/houseReducer';
 import Select from '../Select/Select';
 
@@ -16,10 +17,9 @@ const HouseSelect = () => {
   }));
 
   const selectHouse = (id, label) => {
-    console.log('select id', label, id);
     dispatch(setHouseInputValue(label));
-    // dispatch(fetchHouses(id));
-    // dispatch(setIsHousesDisabled(false));
+    dispatch(fetchApartments(id));
+    dispatch(setIsApartmentsDisabled(false));
   };
 
   const searchHouse = (event) => {

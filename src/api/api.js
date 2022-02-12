@@ -8,4 +8,5 @@ const instance = axios.create({
 export const addressAPI = {
   getStreets: () => instance.get(`${ENDPOINTS.request}/streets`),
   getHouses: (streetId) => instance.get(`${ENDPOINTS.request}/houses/${streetId}`),
+  getApartments: (apartmentId) => instance.get(`${ENDPOINTS.request}/house_flats/${apartmentId}`),
 };

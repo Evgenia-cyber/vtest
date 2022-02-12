@@ -9,13 +9,13 @@ import HouseSelect from './components/HouseSelect/HouseSelect';
 const App = () => {
   const dispatch = useDispatch();
 
-  const { houses } = useSelector((state) => ({
-    houses: state.houseReducer.houses,
+  const { apartments } = useSelector((state) => ({
+    apartments: state.apartmentReducer.apartments,
   }));
   const { isLoading } = useSelector((state) => ({
     isLoading: state.commonReducer.isLoading,
   }));
-  console.log('houses', houses);
+  console.log('apartments', apartments);
   console.log('isLoading', isLoading);
 
   React.useEffect(() => {
