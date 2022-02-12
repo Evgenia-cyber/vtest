@@ -7,12 +7,14 @@ const SET_FILTERED_APARTMENTS = 'vtest/apartment/SET_FILTERED_APARTMENTS';
 const RESET_FILTERED_APARTMENTS = 'vtest/apartment/RESET_FILTERED_APARTMENTS';
 const SET_IS_DISABLED = 'vtest/apartment/SET_IS_DISABLED';
 const SET_INPUT_VALUE = 'vtest/apartment/SET_INPUT_VALUE';
+const SET_IS_SHOW = 'vtest/apartment/SET_IS_SHOW';
 
 let initialState = {
   apartments: [],
   isDisabled: true,
   filteredApartments: [],
   inputValue: '',
+  isShow: false,
 };
 
 const apartmentReducer = (state = initialState, action) => {
@@ -34,6 +36,8 @@ const apartmentReducer = (state = initialState, action) => {
       return { ...state, isDisabled: action.payload };
     case SET_INPUT_VALUE:
       return { ...state, inputValue: action.payload };
+    case SET_IS_SHOW:
+      return { ...state, isShow: action.payload };
     default:
       return state;
   }
@@ -57,6 +61,10 @@ export const setIsApartmentsDisabled = (isDisabled) => ({
 export const setApartmentInputValue = (value) => ({
   type: SET_INPUT_VALUE,
   payload: value,
+});
+export const setIsShowApartments = (isShow) => ({
+  type: SET_IS_SHOW,
+  payload: isShow,
 });
 
 export const fetchApartments = (apartmentId) => async (dispatch) => {

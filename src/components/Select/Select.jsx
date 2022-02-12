@@ -13,22 +13,10 @@ const Select = ({
   selectType = 'address_select',
   searchOption,
   setSelectedOption,
+  showOptions,
+  toggleShowOptions,
+  isShow,
 }) => {
-  const [isShow, setIsShow] = React.useState(false);
-
-  const toggleShowOptions = () => {
-    setIsShow(!isShow);
-  };
-
-  const showOptions = () => {
-    setIsShow(true);
-  };
-
-  const onOptionClickHandler = (id, label) => {
-    setIsShow(false);
-    setSelectedOption(id, label);
-  };
-
   return (
     <div className={styles[selectType]}>
       <div className={styles.input_wrap}>
@@ -53,7 +41,7 @@ const Select = ({
         {options.length > 0 && (
           <ul className={styles.list}>
             {options.map((option) => (
-              <Option key={option.id} label={option.name} id={option.id} onClickHandler={onOptionClickHandler} />
+              <Option key={option.id} label={option.name} id={option.id} onClickHandler={setSelectedOption} />
             ))}
           </ul>
         )}

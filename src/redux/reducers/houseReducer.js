@@ -7,12 +7,14 @@ const SET_FILTERED_HOUSES = 'vtest/house/SET_FILTERED_HOUSES';
 const RESET_FILTERED_HOUSES = 'vtest/house/RESET_FILTERED_HOUSES';
 const SET_IS_DISABLED = 'vtest/house/SET_IS_DISABLED';
 const SET_INPUT_VALUE = 'vtest/house/SET_INPUT_VALUE';
+const SET_IS_SHOW = 'vtest/house/SET_IS_SHOW';
 
 let initialState = {
   houses: [],
   isDisabled: true,
   filteredHouses: [],
   inputValue: '',
+  isShow: false,
 };
 
 const houseReducer = (state = initialState, action) => {
@@ -34,6 +36,8 @@ const houseReducer = (state = initialState, action) => {
       return { ...state, isDisabled: action.payload };
     case SET_INPUT_VALUE:
       return { ...state, inputValue: action.payload };
+    case SET_IS_SHOW:
+      return { ...state, isShow: action.payload };
     default:
       return state;
   }
@@ -57,6 +61,10 @@ export const setIsHousesDisabled = (isDisabled) => ({
 export const setHouseInputValue = (value) => ({
   type: SET_INPUT_VALUE,
   payload: value,
+});
+export const setIsShowHouses = (isShow) => ({
+  type: SET_IS_SHOW,
+  payload: isShow,
 });
 
 export const fetchHouses = (streetId) => async (dispatch) => {

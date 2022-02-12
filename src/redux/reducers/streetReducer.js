@@ -1,5 +1,4 @@
 import { addressAPI } from '../../api/api';
-import { NO_SELECTED_INDEX } from '../../constants';
 import { getStreetsData, searchMatches } from '../../utils/utils';
 import { setIsLoading } from './commonReducer';
 
@@ -7,11 +6,13 @@ const SET_STREETS = 'vtest/street/SET_STREETS';
 const SET_FILTERED_STREETS = 'vtest/street/SET_FILTERED_STREETS';
 const RESET_FILTERED_STREETS = 'vtest/street/RESET_FILTERED_STREETS';
 const SET_INPUT_VALUE = 'vtest/street/SET_INPUT_VALUE';
+const SET_IS_SHOW = 'vtest/street/SET_IS_SHOW';
 
 let initialState = {
   streets: [],
   filteredStreets: [],
   inputValue: '',
+  isShow: false,
 };
 
 const streetReducer = (state = initialState, action) => {
@@ -31,6 +32,8 @@ const streetReducer = (state = initialState, action) => {
       return { ...state, filteredStreets: state.streets };
     case SET_INPUT_VALUE:
       return { ...state, inputValue: action.payload };
+    case SET_IS_SHOW:
+      return { ...state, isShow: action.payload };
     default:
       return state;
   }
@@ -50,6 +53,10 @@ export const resetFilteredStreets = () => ({
 export const setStreetInputValue = (value) => ({
   type: SET_INPUT_VALUE,
   payload: value,
+});
+export const setIsShowStreets = (isShow) => ({
+  type: SET_IS_SHOW,
+  payload: isShow,
 });
 
 export const fetchStreets = () => async (dispatch) => {
