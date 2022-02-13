@@ -18,4 +18,5 @@ export const userAPI = {
   getAllUsers: (apartmentId) => instance.get(`${ENDPOINTS.housing}clients?addressId=${apartmentId}`),
   createUser: (body) => instance.post(`${ENDPOINTS.housing}client`, body),
   bindUser: (body) => instance.put(`${ENDPOINTS.housing}bind_client`, body),
+  deleteUser: (id) => instance.delete(`${ENDPOINTS.housing}bind_client/${id}`),
 };

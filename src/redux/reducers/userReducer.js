@@ -24,6 +24,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         addressId: action.payload,
       };
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: action.payload,
+      };
     default:
       return state;
   }
@@ -63,7 +68,7 @@ export const createUser =
       name,
       phone: tel,
       email,
-      addressId,
+      bindId: addressId,
     };
     try {
       const { data } = await userAPI.createUser(body);
@@ -81,5 +86,18 @@ export const createUser =
       dispatch(setIsLoading(false));
     }
   };
+
+export const deleteUser = (bindId, userId, addressId) => async (dispatch) => {
+  dispatch(setIsLoading(true));
+  try {
+    await userAPI.deleteUser(bindId);
+    await userAPI.deleteUser(userId);
+    dispatch(fetchAllUsers(addressId));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(setIsLoading(false));
+  }
+};
 
 export default userReducer;
