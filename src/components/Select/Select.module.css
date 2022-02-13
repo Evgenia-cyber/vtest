@@ -43,3 +43,13 @@
   margin: 0;
   padding: 0;
 }
+
+@media screen and (max-width: 650px) {
+  .street_select {
+    flex-basis: calc(90% + 10px);
+  }
+
+  .address_select {
+    flex-basis: 45%;
+  }
+}

@@ -37,3 +37,9 @@
   position: static;
   transform: translateY(0);
 }
+
+@media screen and (max-width: 550px) {
+  .card_wrap {
+    flex-basis: 90%;
+  }
+}
