@@ -18,7 +18,7 @@ const Users = () => {
         users.map((user) => (
           <UserCard
             key={user.id}
-            userId={user.id}
+            id={user.id}
             name={user.name}
             phone={user.phone}
             email={user.email}

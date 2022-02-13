@@ -1,35 +1,30 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SUBMIT_BTN } from '../../constants';
-import { setIsShowModal } from '../../redux/reducers/commonReducer';
+import { MODAL } from '../../constants';
 import { createUser } from '../../redux/reducers/userReducer';
 
 import styles from './Modal.module.css';
 
-const Modal = ({ type }) => {
+const Modal = ({ type, setIsShowModal, initData }) => {
   const dispatch = useDispatch();
 
   const { addressId } = useSelector((state) => ({
     addressId: state.userReducer.addressId,
   }));
 
-  const [data, setData] = React.useState({
-    name: '',
-    email: '',
-    tel: '',
-  });
+  const [data, setData] = React.useState(initData);
 
   const onCancelHandler = () => {
     console.log('cancel');
-    dispatch(setIsShowModal(false));
+    setIsShowModal(false);
   };
 
-  const submitBtnText = SUBMIT_BTN[type];
+  const submitBtnText = MODAL[type].btnText;
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
     console.log('submit', data);
-    dispatch(setIsShowModal(false));
+    setIsShowModal(false);
     dispatch(createUser(data, addressId));
   };
 
