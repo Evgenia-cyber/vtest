@@ -60,32 +60,55 @@ export const fetchAllUsers = (apartmentId) => async (dispatch) => {
   }
 };
 
-export const createUser =
+const create =
   ({ name, email, tel }, addressId) =>
   async (dispatch) => {
-    dispatch(setIsLoading(true));
     const body = {
       name,
       phone: tel,
       email,
       bindId: addressId,
     };
+    const { data } = await userAPI.createUser(body);
+    const { id, result } = data;
+    if (result === OK) {
+      await userAPI.bindUser({
+        addressId,
+        clientId: id,
+      });
+      dispatch(fetchAllUsers(addressId));
+    }
+  };
+
+const remove = async (bindId, userId) => {
+  await userAPI.deleteUser(bindId);
+  await userAPI.deleteUser(userId);
+};
+
+export const createUser =
+  ({ name, email, tel }, addressId) =>
+  async (dispatch) => {
+    dispatch(setIsLoading(true));
     try {
       const res = await userAPI.getUser(tel);
-      console.log('result', res);
       if (res.status !== OK_STATUS) {
-        const { data } = await userAPI.createUser(body);
-        const { id, result } = data;
-        if (result === OK) {
-          await userAPI.bindUser({
-            addressId,
-            clientId: id,
-          });
-          dispatch(fetchAllUsers(addressId));
-        }
+        dispatch(create({ name, email, tel }, addressId));
       } else {
-        console.error('User already exists!');
+        alert('Пользователь с таким номером телефона уже существует!');
       }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  };
+
+export const editUser =
+  ({ name, email, tel }, addressId, userId, bindId) =>
+  async (dispatch) => {
+    try {
+      await remove(bindId, userId);
+      dispatch(create({ name, email, tel }, addressId));
     } catch (error) {
       console.log(error);
     } finally {
@@ -96,8 +119,7 @@ export const createUser =
 export const deleteUser = (bindId, userId, addressId) => async (dispatch) => {
   dispatch(setIsLoading(true));
   try {
-    await userAPI.deleteUser(bindId);
-    await userAPI.deleteUser(userId);
+    await remove(bindId, userId);
     dispatch(fetchAllUsers(addressId));
   } catch (error) {
     console.log(error);

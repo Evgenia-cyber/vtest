@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MODAL } from '../../constants';
-import { createUser, deleteUser } from '../../redux/reducers/userReducer';
+import { createUser, deleteUser, editUser } from '../../redux/reducers/userReducer';
 
 import styles from './Modal.module.css';
 
@@ -13,9 +13,8 @@ const Modal = ({ type, setIsShowModal, initData }) => {
     currentUser: state.userReducer.currentUser,
   }));
 
-  console.log('[currentUser]', currentUser);
-
   const isRemoveModal = type === MODAL.remove.type;
+  const isEditModal = type === MODAL.edit.type;
 
   const [data, setData] = React.useState(initData);
 
@@ -30,6 +29,8 @@ const Modal = ({ type, setIsShowModal, initData }) => {
     setIsShowModal(false);
     if (isRemoveModal) {
       dispatch(deleteUser(currentUser.bindId, currentUser.id, addressId));
+    } else if (isEditModal) {
+      dispatch(editUser(data, addressId, currentUser.id, currentUser.bindId));
     } else {
       dispatch(createUser(data, addressId));
     }
