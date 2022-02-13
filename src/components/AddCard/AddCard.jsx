@@ -14,10 +14,8 @@ const AddCard = () => {
   const { isShowModal } = useSelector((state) => ({
     isShowModal: state.commonReducer.isShowModal,
   }));
-  console.log('isShowModal', isShowModal);
 
   const addUser = () => {
-    console.log('add');
     dispatch(setIsShowModal(true));
   };
 

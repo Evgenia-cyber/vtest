@@ -15,3 +15,5 @@ export const SUBMIT_BTN = {
   edit: 'Сохранить',
   remove: 'Удалить',
 };
+
+export const OK = 'Ok';

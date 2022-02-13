@@ -1,12 +1,17 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SUBMIT_BTN } from '../../constants';
 import { setIsShowModal } from '../../redux/reducers/commonReducer';
+import { createUser } from '../../redux/reducers/userReducer';
 
 import styles from './Modal.module.css';
 
 const Modal = ({ type }) => {
   const dispatch = useDispatch();
+
+  const { addressId } = useSelector((state) => ({
+    addressId: state.userReducer.addressId,
+  }));
 
   const [data, setData] = React.useState({
     name: '',
@@ -23,8 +28,9 @@ const Modal = ({ type }) => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log('submit');
+    console.log('submit', data);
     dispatch(setIsShowModal(false));
+    dispatch(createUser(data, addressId));
   };
 
   const onInputChange = (event) => {
