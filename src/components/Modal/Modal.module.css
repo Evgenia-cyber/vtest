@@ -1,0 +1,56 @@
+.modal_wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: hidden;
+}
+
+.form {
+  margin-top: 50px;
+  padding: 30px 30px 30px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.name,
+.email,
+.tel {
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.button {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #e1f4ff;
+  transition: background-color 0.3s ease;
+}
