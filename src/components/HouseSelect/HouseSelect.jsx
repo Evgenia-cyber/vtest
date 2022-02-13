@@ -2,10 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import {
+  disableApartmentSelect,
   fetchApartments,
-  setApartmentInputValue,
   setIsApartmentsDisabled,
-  setIsShowApartments,
 } from '../../redux/reducers/apartmentReducer';
 import {
   resetFilteredHouses,
@@ -13,6 +12,7 @@ import {
   setHouseInputValue,
   setIsShowHouses,
 } from '../../redux/reducers/houseReducer';
+import { cleanUsers } from '../../redux/reducers/userReducer';
 import Select from '../Select/Select';
 
 import styles from './HouseSelect.module.css';
@@ -34,18 +34,13 @@ const HouseSelect = () => {
     dispatch(setIsApartmentsDisabled(false));
   };
 
-  const disableApartmentSelect = () => {
-    dispatch(setIsApartmentsDisabled(true));
-    dispatch(setApartmentInputValue(''));
-    dispatch(setIsShowApartments(false));
-  };
-
   const searchHouse = (event) => {
     const { value } = event.target;
     dispatch(setHouseInputValue(value));
     if (!value) {
       dispatch(resetFilteredHouses());
-      disableApartmentSelect();
+      dispatch(disableApartmentSelect());
+      dispatch(cleanUsers());
     }
     dispatch(setFilteredHouses(value));
   };

@@ -80,4 +80,10 @@ export const fetchApartments = (apartmentId) => async (dispatch) => {
   }
 };
 
+export const disableApartmentSelect = () => async (dispatch) => {
+  dispatch(setIsApartmentsDisabled(true));
+  dispatch(setApartmentInputValue(''));
+  dispatch(setIsShowApartments(false));
+};
+
 export default apartmentReducer;

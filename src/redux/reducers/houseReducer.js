@@ -79,4 +79,10 @@ export const fetchHouses = (streetId) => async (dispatch) => {
   }
 };
 
+export const disableHouseSelect = () => async (dispatch) => {
+  dispatch(setIsHousesDisabled(true));
+  dispatch(setHouseInputValue(''));
+  dispatch(setIsShowHouses(false));
+};
+
 export default houseReducer;

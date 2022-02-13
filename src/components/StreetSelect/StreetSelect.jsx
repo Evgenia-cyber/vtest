@@ -1,23 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import {
-  setApartmentInputValue,
-  setIsApartmentsDisabled,
-  setIsShowApartments,
-} from '../../redux/reducers/apartmentReducer';
-import {
-  fetchHouses,
-  setHouseInputValue,
-  setIsHousesDisabled,
-  setIsShowHouses,
-} from '../../redux/reducers/houseReducer';
+import { disableApartmentSelect } from '../../redux/reducers/apartmentReducer';
+import { disableHouseSelect, fetchHouses, setIsHousesDisabled } from '../../redux/reducers/houseReducer';
 import {
   resetFilteredStreets,
   setFilteredStreets,
   setIsShowStreets,
   setStreetInputValue,
 } from '../../redux/reducers/streetReducer';
+import { cleanUsers } from '../../redux/reducers/userReducer';
 import Select from '../Select/Select';
 
 import styles from './StreetSelect.module.css';
@@ -38,25 +30,14 @@ const StreetSelect = () => {
     dispatch(setIsHousesDisabled(false));
   };
 
-  const disableHouseSelect = () => {
-    dispatch(setIsHousesDisabled(true));
-    dispatch(setHouseInputValue(''));
-    dispatch(setIsShowHouses(false));
-  };
-
-  const disableApartmentSelect = () => {
-    dispatch(setIsApartmentsDisabled(true));
-    dispatch(setApartmentInputValue(''));
-    dispatch(setIsShowApartments(false));
-  };
-
   const searchStreet = (event) => {
     const { value } = event.target;
     dispatch(setStreetInputValue(value));
     if (!value) {
       dispatch(resetFilteredStreets());
-      disableHouseSelect();
-      disableApartmentSelect();
+      dispatch(disableHouseSelect());
+      dispatch(disableApartmentSelect());
+      dispatch(cleanUsers());
     }
     dispatch(setFilteredStreets(value));
   };

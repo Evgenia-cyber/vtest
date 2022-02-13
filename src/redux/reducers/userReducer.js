@@ -128,4 +128,10 @@ export const deleteUser = (bindId, userId, addressId) => async (dispatch) => {
   }
 };
 
+export const cleanUsers = () => (dispatch) => {
+  dispatch(setUsers([]));
+  dispatch(setAddressId(NO_ADDRESS));
+  dispatch(setCurrentUser({}));
+};
+
 export default userReducer;
