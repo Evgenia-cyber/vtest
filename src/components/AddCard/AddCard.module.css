@@ -1,0 +1,14 @@
+.card_wrap {
+  width: 105px;
+  height: 70px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.card_wrap>button {
+  top: 50%;
+  right: 35px;
+  padding: 0;
+}
