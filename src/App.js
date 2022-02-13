@@ -5,6 +5,7 @@ import StreetSelect from './components/StreetSelect/StreetSelect';
 import HouseSelect from './components/HouseSelect/HouseSelect';
 import ApartmentSelect from './components/ApartmentSelect/ApartmentSelect';
 import Users from './components/Users/Users';
+import Loader from './components/Loader/Loader';
 
 import './App.css';
 
@@ -14,7 +15,6 @@ const App = () => {
   const { isLoading } = useSelector((state) => ({
     isLoading: state.commonReducer.isLoading,
   }));
-  console.log('isLoading', isLoading);
 
   React.useEffect(() => {
     dispatch(fetchStreets());
@@ -28,6 +28,7 @@ const App = () => {
         <ApartmentSelect />
       </div>
       <Users />
+      {isLoading && <Loader />}
     </div>
   );
 };
