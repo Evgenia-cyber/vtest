@@ -23,3 +23,5 @@ export const MODAL_EMPTY_DATA = {
   email: '',
   tel: '',
 };
+
+export const OK_STATUS = 200;

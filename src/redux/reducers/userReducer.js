@@ -1,5 +1,5 @@
 import { userAPI } from '../../api/api';
-import { NO_ADDRESS, OK } from '../../constants';
+import { NO_ADDRESS, OK, OK_STATUS } from '../../constants';
 import { setIsLoading } from './commonReducer';
 
 const SET_USERS = 'vtest/user/SET_USERS';
@@ -71,14 +71,20 @@ export const createUser =
       bindId: addressId,
     };
     try {
-      const { data } = await userAPI.createUser(body);
-      const { id, result } = data;
-      if (result === OK) {
-        await userAPI.bindUser({
-          addressId,
-          clientId: id,
-        });
-        dispatch(fetchAllUsers(addressId));
+      const res = await userAPI.getUser(tel);
+      console.log('result', res);
+      if (res.status !== OK_STATUS) {
+        const { data } = await userAPI.createUser(body);
+        const { id, result } = data;
+        if (result === OK) {
+          await userAPI.bindUser({
+            addressId,
+            clientId: id,
+          });
+          dispatch(fetchAllUsers(addressId));
+        }
+      } else {
+        console.error('User already exists!');
       }
     } catch (error) {
       console.log(error);
