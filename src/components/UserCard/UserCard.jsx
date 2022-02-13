@@ -5,9 +5,9 @@ import removeImg from '../../assets/icons/remove.svg';
 
 import styles from './UserCard.module.css';
 
-const UserCard = ({ name, phone, email, userId }) => {
+const UserCard = ({ name, phone, email, userId, bindId }) => {
   const removeUser = () => {
-    console.log('remove', userId);
+    console.log('remove', userId, bindId);
   };
 
   const editUser = () => {
